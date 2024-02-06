@@ -8,8 +8,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "spark-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "spark-operator.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.annotations }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

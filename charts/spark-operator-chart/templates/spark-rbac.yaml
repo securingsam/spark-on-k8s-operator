@@ -6,6 +6,10 @@ metadata:
   namespace: {{ default .Release.Namespace .Values.sparkJobNamespace }}
   labels:
     {{- include "spark-operator.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.rbac.annotations }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
 rules:
 - apiGroups:
   - ""
@@ -40,6 +44,10 @@ metadata:
   namespace: {{ default .Release.Namespace .Values.sparkJobNamespace }}
   labels:
     {{- include "spark-operator.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.rbac.annotations }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
 subjects:
 - kind: ServiceAccount
   name: {{ include "spark.serviceAccountName" . }}

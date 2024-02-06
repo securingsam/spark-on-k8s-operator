@@ -3,6 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "spark-operator.fullname" . }}-webhook-init
+  namespace: {{ .Release.Namespace }}
   annotations:
     {{- toYaml .Values.webhook.initAnnotations | nindent 4 }}
   labels:

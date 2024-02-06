@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: {{ include "spark-operator.fullname" . }}-webhook
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "spark-operator.labels" . | nindent 4 }}
 spec:
